@@ -76,16 +76,34 @@ sayHelloButton.addEventListener("click", sayHello);
     
     Handle the promise that's returned with a .then, which you should pass a callback function to. Inside the callback function, console.log the response's data (in the intermediate instructions we'll come back to this function and add HTML).
 */ 
+// let baseURL = "http://localhost:3000"
+
+// const ohMy = () => {
+//     axios.get(`${baseURL}/animals?animals`).then(result => {
+//         console.log(result.data);
+//     }).catch(err => console.log({err, message: "OhMy has issues"}));
+// }
+
+// document.getElementById('animals-button').addEventListener('click', ohMy);
+const body = document.querySelector("body");
+
 let baseURL = "http://localhost:3000"
 
 const ohMy = () => {
     axios.get(`${baseURL}/animals?animals`).then(result => {
-        console.log(result.data);
+        for(let i = 0; i < result.data.length; i++) {
+            let p = document.createElement("p");
+            p.textContent = result.data[i];
+            body.appendChild(p);
+        }
     }).catch(err => console.log({err, message: "OhMy has issues"}));
 }
 
 document.getElementById('animals-button').addEventListener('click', ohMy)
 
+// Back in the ohMy function on Problem 5, replace the console log in the promise's callback with a for loop that loops over res.data. 
+
+// On each iteration of the loop, create a new p element. Set its textContent equal the string at the current index (i) and then append the new p element onto the document's body. 
 
 // PROBLEM 6 
 /*
@@ -133,7 +151,7 @@ document.querySelector("#repeat-button").addEventListener("click", repeatMyParam
 // CODE HERE
 
 const myQuery = () => {
-    axios.get(`${baseURL}/query-test?Can I ask you a question`).then(result => {
+    axios.get(`${baseURL}/query-test?result=Can I ask you a question&Where do I come from`).then(result => {
         console.log(result.data);
     }).catch(err => console.log({err, message: "What query?"})); 
 }
@@ -159,7 +177,16 @@ document.querySelector("#query-button").addEventListener("click", myQuery);
 
     1: Send no queries on the URL -- what happened? 
 
+entered: (`${baseURL}/query-test`)
+
+    'You sent an empty query!'
+
     2: Send more than 1 query on the URL -- what happened? 
+
+entered: (`${baseURL}/query-test?result=Can I ask you a question&Where do I come from`)
+
+    'You sent more than 1 query!'
+
 */
 
 // Edit code in Problem 8
@@ -190,3 +217,10 @@ document.querySelector("#query-button").addEventListener("click", myQuery);
 */
 
 // CODE HERE 
+
+const createFood () {
+    const foodInput = document.querySelector("input");
+    const body {
+        newFood: inputValue
+    }
+}
