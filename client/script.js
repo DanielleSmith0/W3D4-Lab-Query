@@ -218,9 +218,25 @@ entered: (`${baseURL}/query-test?result=Can I ask you a question&Where do I come
 
 // CODE HERE 
 
-const createFood () {
-    const foodInput = document.querySelector("input");
-    const body {
-        newFood: inputValue
-    }
+function createFood (event) {
+    event.preventDefault();
+    let list = document.querySelector("ol")
+    let foodInput = document.getElementById("addFood");
+
+    list.innerHTML = "";
+
+    const body = {
+        newFood: foodInput.value
+    };
+
+    axios.post('http://localhost:3000/food', body).then(result => {
+        // console.log(result.data);
+        result.data.forEach (item => {
+            let element = document.createElement("li");
+            element.textContent = item;
+            list.appendChild(element);
+        })
+    }).catch(err => console.log(err));
 }
+
+document.querySelector("form").addEventListener("submit", createFood);
